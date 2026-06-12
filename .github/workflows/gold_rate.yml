@@ -2,9 +2,7 @@ name: Gold Rate Scraper
 
 on:
   schedule:
-    - cron: '30 4 * * *'
-    - cron: '30 7 * * *'
-    - cron: '30 9 * * *'
+    - cron: '30 4,7,9 * * *'
 
   workflow_dispatch:
 
