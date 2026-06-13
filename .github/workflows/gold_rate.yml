@@ -2,8 +2,16 @@ name: Gold Rate Scraper
 
 on:
   schedule:
-    - cron: '30 4,7,9 * * *'
+    # IST = UTC + 5:30
+    # 09:47 AM IST = 04:17 UTC
+    - cron: '17 4 * * *'
 
+    # 12:41 PM IST = 07:11 UTC
+    - cron: '11 7 * * *'
+
+    # 02:53 PM IST = 09:23 UTC
+    - cron: '23 9 * * *'
+    
   workflow_dispatch:
 
 jobs:
