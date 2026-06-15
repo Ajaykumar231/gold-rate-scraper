@@ -127,12 +127,23 @@ if latest.data:
     print("Previous 22K:", last_row["rate_22k"])
     print("Previous 24K:", last_row["rate_24k"])
 
-    if (
+    same_rate = (
         float(last_row["rate_22k"]) == float(rate_22k)
         and float(last_row["rate_24k"]) == float(rate_24k)
-    ):
+    )
+
+    # Last inserted date
+    last_date = last_row["created_at"][:10]
+
+    # Today's UTC date
+    today_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    print("Last Record Date:", last_date)
+    print("Today Date:", today_date)
+
+    if same_rate and last_date == today_date:
         insert_data = False
-        print("Rate unchanged. Skipping insert.")
+        print("Same rate and same day. Skipping insert.")
 
 # =========================
 # INSERT NEW DATA
@@ -152,8 +163,5 @@ if insert_data:
         print("Insert Error:", e)
 
 print("Scraper Finished Successfully")
-if insert_data:
-    result = supabase.table("gold_rates").insert(data).execute()
 
-    print("Inserted Successfully")
 
